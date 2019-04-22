@@ -1,8 +1,8 @@
 function [t,sV,xV,zV,P_cov] = run_ukf(t_Ts,U,S)
-% número de estados estimados
-n_e = input('Número de parâmetros a estimar: ');
+% number of estimated states
+n_e = input('NÃºmero de parÃ¢metros a estimar: ');
 disp(' ')
-disp('(1) simulação (2) dados')
+disp('(1) simulaÃ§Ã£o (2) dados')
 opt = input('Tipo de entrada:  ');
 format long
 
@@ -12,7 +12,7 @@ N_Ts = length(t_Ts);
 disp('Taxa de amostragem: ')
 disp(1/Ts)
 
-rel = 1; % relação Ts/h
+rel = 1; % relaÃ§Ã£o Ts/h
 
 if opt == 1
     h = Ts/rel;
@@ -40,10 +40,10 @@ Qn(2,2) = 0.06;
 Rn = r^2*eye(nh,nh);        % covariance of measurement  
 
 if opt == 1
-    % Tensão de terminal
+    % TensÃ£o de terminal
     Vd = 0;
     Vq = 100;
-    % tensão de campo
+    % tensÃ£o de campo
     Vf = 10;
 end
 
@@ -80,7 +80,7 @@ end
 
 zV = zeros(nh,N_Ts);
 
-k1 = 0; % contador interno do laço for para amostragem
+k1 = 0; % contador interno do laÃ§o for para amostragem
 P_cov = zeros(n+n_e,n+n_e,N);
 
 %initializes the input vector
@@ -116,7 +116,7 @@ for k = 1:N
             s(1) = S(1,k);
             s(2) = S(2,k);
             s(3) = S(3,k);
-            s(4) = S(4,k)/2; % sobre dois porque é a w do rotor
+            s(4) = S(4,k)/2; % sobre dois porque Ã© a w do rotor
             s(5) = S(5,k);
         end
         z = measf(s);
